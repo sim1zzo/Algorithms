@@ -110,7 +110,7 @@ public class Tree {
         return list;
 
     }
-    public void traverseLevelOrder(){
+    public void breathFirstSearch(){
         for (var i = 0; i <= height(); i++){
             for (var value: getNodesAtDistance(i))
                 System.out.println(value);
@@ -205,52 +205,4 @@ public class Tree {
         getNodesAtDistance(root.leftChild,distance -1, list);
         getNodesAtDistance(root.rightChild,distance -1, list);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
