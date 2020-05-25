@@ -1,5 +1,7 @@
 package com.sim1zzo.algorithm_part2;
 
+import java.util.ArrayList;
+
 public class Tree {
     private class Node{
         private int value;
@@ -99,6 +101,21 @@ public class Tree {
                     && equals(fist.rightChild,second.rightChild);
         return false;
     }
+    public boolean isBST(){
+        return isBST(root, Integer.MIN_VALUE,Integer.MAX_VALUE);
+    }
+    public ArrayList<Integer> getNodesAtDistance(int distance){
+        var list = new ArrayList<Integer>();
+        getNodesAtDistance(root, distance, list);
+        return list;
+
+    }
+    public void traverseLevelOrder(){
+        for (var i = 0; i <= height(); i++){
+            for (var value: getNodesAtDistance(i))
+                System.out.println(value);
+        }
+    }
 
 
 
@@ -164,6 +181,32 @@ public class Tree {
     private boolean isEmpty(){
         return root == null;
     }
+    private boolean isBST(Node root, int minValue, int maxValue){
+        if (isEmpty())
+            return true;
+        if (root.value < minValue || root.value > maxValue) // out of range
+            return false;
+        return isBST(root.leftChild, minValue, root.value -1)
+                && isBST(root.rightChild, root.value +1, maxValue);
+    }
+
+    private void getNodesAtDistance(Node root, int distance, ArrayList<Integer> list){
+        if (isEmpty())
+            return;
+
+        if (distance == 0) {
+            list.add(root.value);
+            return;
+        }
+        if (distance > height()){
+            throw new IllegalStateException();
+        }
+
+        getNodesAtDistance(root.leftChild,distance -1, list);
+        getNodesAtDistance(root.rightChild,distance -1, list);
+    }
+
+
 
 
 
